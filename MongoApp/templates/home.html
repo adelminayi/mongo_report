@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+مپصافود
+{% endblock title %}
+
+{% block content %}
+<div class="row" style="margin-right:25%; margin-bottom: 50px;">
+<h1>تاریخ را انتخاب کنید</h1>
+</div>
+<form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <b>{{ field.label_tag }}</b> {{ field }}
+    {% endfor %}
+    <div class="row" style="margin-top: 50px;">
+        <div class="col-1" style="margin-right: 35%;">
+            <input type="submit" value="گزارش گیری">
+        </div>
+    </div>
+</form>
+
+{% endblock content%}

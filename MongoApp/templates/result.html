@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<h1>دانلود گزارش :</h1>
+
+<li>از تاریخ :‌ {{ data1 }}  - ساعت : {{ h1 }} </li>
+<li>تا تاریخ :{{ data2 }}  - ساعت :‌ {{ h2 }} </li>
+
+<a  type="button" class="btn btn-success" href="{% url 'download' filename=fname %}" style="margin-top: 50px; margin-right: 30%; size: 10%;"> download </a>
+{% endblock content %}
