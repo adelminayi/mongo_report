@@ -56,27 +56,6 @@ def query_mongo(start_time, h1, end_time, h2):
         print(" no result found!")
 
 
-@csrf_exempt
-def home(request):
-    context_post = "post request"
-    context_get = "get request"
-    # print('im in home!6666666666666666666666666666666')
-    if request.method == "GET":
-        return render(request, 'home.html')
-
-    elif request.method == "POST":
-        from_date = request.POST.get('date_from')
-        # print(from_date, '************************')
-        # to_date = request.POST.get('date_to')
-        # print(to_date, '************************')
-        return HttpResponse(context_post)
-
-
-class Contact(FormView):
-    template_name = 'home.html'
-    form_class = DateForm
-    success_url = 'result'
-
 
 class MyFormView(View):
     form_class = DateForm
@@ -86,7 +65,6 @@ class MyFormView(View):
     @csrf_exempt
     def get(self, request, *args, **kwargs):
         form = self.form_class(initial=self.initial)
-        print('im in home! 77777777777777777777')
         return render(request, self.template_name, {'form': form})
 
     # @method_decorator(csrf_exempt)
@@ -103,13 +81,10 @@ class MyFormView(View):
             data2 = form.cleaned_data.get('to_date')
             h1 = form.cleaned_data.get('from_hour').time()
             h2 = form.cleaned_data.get('to_hour').time()
-            # print('8888888888888888888888888888888888888')
             # print(data1)
             # print(data2)
             query_link, file_name = query_mongo(data1,str(h1), data2,str(h2))
             # print(query_link)
-            # /home/adel/DjangoCRUDMongoDB/DjangoCrudMongoDB/query-result-010521-1355.csv
-            # print(dl_link)
             print( '-----------sa@ check --------------')
             print(h1)
             print(h2)
@@ -131,7 +106,6 @@ def download_file(request, filename=''):
     # Define Django project base directory
     BASE_DIR = (os.path.dirname(os.path.abspath(__file__)))
     # Define text file name
-    # filename = 'query-result-010521-1512.csv'
     filename = filename
 
     # Define the full file path
